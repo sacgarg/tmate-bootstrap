@@ -1,0 +1,8 @@
+---
+applications:
+- name: tmate-bootstrap
+  memory: 256M
+  instances: 1
+  host: tmate-bootstrap
+  domain: cfapps.io
+  path: .
