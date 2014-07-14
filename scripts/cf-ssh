@@ -34,8 +34,10 @@ DELIM
     done
   fi
 
-  echo "  env:" >> ${manifest}
-  cf env $appname | grep "^\w\w*: \w\w*" | xargs -L 1 -J % echo "   " % >> ${manifest}
+  if [[ "$(cf env $appname | grep "^\w\w*: \w\w*")X" != "X" ]]; then
+    echo "  env:" >> ${manifest}
+    cf env $appname | grep "^\w\w*: \w\w*" | xargs -L 1 -J % echo "   " % >> ${manifest}
+  fi
 }
 
 app_status=$(cf app ${ssh_appname} | tail -n1 | awk '{print $2}')
