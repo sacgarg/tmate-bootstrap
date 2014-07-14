@@ -10,13 +10,16 @@ if [[ "${appname}X" == "X" ]]; then
 fi
 shift
 
-while getopts "b:" opt; do
+while getopts "b:p:" opt; do
   case $opt in
     b)
       buildpack=$OPTARG
       ;;
+    p)
+      app_path=$OPTARG
+      ;;
     *)
-      echo "unrecognized option"
+      echo "unrecognized option: $opt"
       ;;
   esac
 done
@@ -41,6 +44,10 @@ DELIM
 
   if [[ "${buildpack}X" != "X" ]]; then
     echo "  buildpack: ${buildpack}" >> ${manifest}
+  fi
+
+  if [[ "${app_path}X" != "X" ]]; then
+    echo "  path: ${app_path}" >> ${manifest}
   fi
 
   services_bound_to_app=$(cf s | grep " $appname " | awk '{ print $1 }')
