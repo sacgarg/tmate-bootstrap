@@ -2,17 +2,30 @@
 
 set -o pipefail
 
-# $CF_SSH_CLEANUP options: "delete", else stop upon exit
-# Stopping means the SSH container is not re-created with latest
-# application source code/buildpack next time.
-CF_SSH_CLEANUP=${CF_SSH_CLEANUP:-"delete"}
-
 appname=$1
 if [[ "${appname}X" == "X" ]]; then
   cf apps
   echo "USAGE: cf-ssh APPNAME"
   exit 1
 fi
+shift
+
+while getopts "b:" opt; do
+  case $opt in
+    b)
+      buildpack=$OPTARG
+      ;;
+    *)
+      echo "unrecognized option"
+      ;;
+  esac
+done
+
+
+# $CF_SSH_CLEANUP options: "delete", else stop upon exit
+# Stopping means the SSH container is not re-created with latest
+# application source code/buildpack next time.
+CF_SSH_CLEANUP=${CF_SSH_CLEANUP:-"delete"}
 
 ssh_appname="$appname-ssh"
 
@@ -25,6 +38,10 @@ applications:
   command: curl http://tmate-bootstrap.cfapps.io | sh
   no-route: true
 DELIM
+
+  if [[ "${buildpack}X" != "X" ]]; then
+    echo "  buildpack: ${buildpack}" >> ${manifest}
+  fi
 
   services_bound_to_app=$(cf s | grep " $appname " | awk '{ print $1 }')
   if [[ "${services_bound_to_app}X" != "X" ]]; then
@@ -58,8 +75,12 @@ fi
 sleep 1 # ensure tmate connection setup
 ssh_host=$(cf logs $ssh_appname --recent | grep tmate.io | tail -n1 | awk '{print $NF }')
 
-echo "Running: ssh $ssh_host"
-ssh $ssh_host
+if [[ "${ssh_host}X" != "X" ]]; then
+  echo "Running: ssh $ssh_host"
+  ssh $ssh_host
+else
+  echo "Failed to run SSH container, skipping..."
+fi
 
 if [[ "${CF_SSH_CLEANUP}" == "delete" ]]; then
   cf delete $ssh_appname -f
