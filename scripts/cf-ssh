@@ -30,6 +30,11 @@ done
 # application source code/buildpack next time.
 CF_SSH_CLEANUP=${CF_SSH_CLEANUP:-"delete"}
 
+# $CF_SSH_TIMEOUT should be set to whatever length in seconds
+# you need for your app to have started and tmate to have written
+# out to the log files, for cf-ssh to grep it back out.
+CF_SSH_TIMEOUT=${CF_SSH_TIMEOUT:-"10"}
+
 ssh_appname="$appname-ssh"
 
 manifest=${manifest:-./cf-ssh.yml}
@@ -79,7 +84,7 @@ else
   cf push ${ssh_appname} -f ${manifest}
 fi
 
-sleep 1 # ensure tmate connection setup
+sleep $CF_SSH_TIMEOUT # ensure tmate connection setup
 ssh_host=$(cf logs $ssh_appname --recent | grep tmate.io | tail -n1 | awk '{print $NF }')
 
 if [[ "${ssh_host}X" != "X" ]]; then
