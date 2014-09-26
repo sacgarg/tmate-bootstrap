@@ -65,7 +65,11 @@ DELIM
 
   if [[ "$(cf env $appname | grep "^\w\w*: \w\w*")X" != "X" ]]; then
     echo "  env:" >> ${manifest}
-    cf env $appname | grep "^\w\w*: \w\w*" | xargs -L 1 -J % echo "   " % >> ${manifest}
+    if [`uname` == 'Darwin']; then
+        cf env $appname | grep "^\w\w*: \w\w*" | xargs -L 1 -J % echo "   " % >> ${manifest}
+    else
+        cf env $appname | grep "^\w\w*: \w\w*" | xargs -L 1 -I % echo "   " % >> ${manifest}
+    fi
   fi
 }
 
