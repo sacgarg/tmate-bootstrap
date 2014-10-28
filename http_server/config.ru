@@ -13,7 +13,7 @@ class BootstrapServ < Sinatra::Base
     mkdir -p $HOME/bin
 
     # Get bootstrap
-    curl #{url}/tmate-bootstrap > $HOME/bin/tmate-bootstrap
+    curl -L #{url}/tmate-bootstrap > $HOME/bin/tmate-bootstrap
 
     # Make the temporary file executable
     chmod +x  $HOME/bin/tmate-bootstrap
