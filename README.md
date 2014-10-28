@@ -69,3 +69,16 @@ Move the executable into the `http_server/payload` folder.
 ```
 mv tmate-bootstrap http_server/payload/
 ```
+
+Deploy to local Cloud Foundry
+-----------------------------
+
+There is a publicly available tmate-bootstrap server at https://tmate-bootstrap.cfapps.io
+
+If you want to host it, and its `tmate-bootstrap` CLI payload, on your own Cloud Foundry:
+
+```
+cd http_server
+bundle
+cf push
+```
