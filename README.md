@@ -58,8 +58,14 @@ Generate `bindata.go` to include the `payload/payload.tgz` file:
 go-bindata payload
 ```
 
-1.	Create `tmate-bootstrap` executable in current folder:
+Create `tmate-bootstrap` executable in current folder:
 
 ```
 go build
+```
+
+Move the executable into the `http_server/payload` folder.
+
+```
+mv tmate-bootstrap http_server/payload/
 ```
