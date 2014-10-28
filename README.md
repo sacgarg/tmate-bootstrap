@@ -42,3 +42,24 @@ export CF_SSH_CLEANUP=keep
 ```
 
 Note: currently it does not know how to specify a buildpack or discover the buildpack used by the target application.
+
+Development
+-----------
+
+Install `go-bindata`:
+
+```
+go get github.com/jteeuwen/go-bindata/...
+```
+
+Generate `bindata.go` to include the `payload/payload.tgz` file:
+
+```
+go-bindata payload
+```
+
+1.	Create `tmate-bootstrap` executable in current folder:
+
+```
+go build
+```
