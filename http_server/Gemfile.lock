@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    cloudfoundry-env (0.0.5)
+      hashie
+    hashie (3.3.1)
     newrelic_rpm (3.9.6.257)
     puma (2.9.1)
       rack (>= 1.1, < 2.0)
@@ -17,6 +20,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cloudfoundry-env
   newrelic_rpm
   puma
   sinatra

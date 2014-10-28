@@ -1,10 +1,11 @@
+require "cloudfoundry/environment"
 require 'newrelic_rpm'
 require 'sinatra/base'
 
 class BootstrapServ < Sinatra::Base
 
   get "/" do
-
+    url = CloudFoundry::Environment.first_url || request.url
     <<-END
     #!/bin/sh
 
@@ -12,7 +13,7 @@ class BootstrapServ < Sinatra::Base
     mkdir -p $HOME/bin
 
     # Get bootstrap
-    curl http://tmate-bootstrap.cfapps.io/tmate-bootstrap > $HOME/bin/tmate-bootstrap
+    curl #{url}/tmate-bootstrap > $HOME/bin/tmate-bootstrap
 
     # Make the temporary file executable
     chmod +x  $HOME/bin/tmate-bootstrap
