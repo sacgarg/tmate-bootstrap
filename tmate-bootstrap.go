@@ -79,10 +79,10 @@ func main() {
 	// start tmate
 	log_action("Starting tmate...")
 	log_action("tmate_bin:")
-	log.Print("tmate_bin =====> " + tmate_bin))
+	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
 	
-	log.Print("tmate_cmd =====> " + tmate_cmd))
+	log.Print("tmate_cmd =====> " + tmate_cmd)
 	f, err := pty.Start(tmate_cmd)
 
 	if err != nil {
