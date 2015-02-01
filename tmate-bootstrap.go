@@ -93,7 +93,9 @@ func main() {
 	//os.Stdout.Write([]byte(tmate_cmd))
 	f, err := pty.Start(tmate_cmd)
 	
-        os.Stdout.Write([]byte(f))
+        exec_ls_cmd := exec.Command("ls", "-al")
+	out, _ = exec_ls_cmd.CombinedOutput()
+	os.Stdout.Write(out)
         
 	if err != nil {
 		os.Stdout.Write([]byte(err.Error()))
