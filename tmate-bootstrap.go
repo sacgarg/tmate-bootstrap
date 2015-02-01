@@ -82,7 +82,7 @@ func main() {
 	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
 	
-	//log.Print("tmate_cmd =====> " + tmate_cmd)
+	os.Stdout.Write(tmate_cmd)
 	f, err := pty.Start(tmate_cmd)
 
 	if err != nil {
