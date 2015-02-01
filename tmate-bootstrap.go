@@ -89,8 +89,8 @@ func main() {
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
-	
-	os.Stdout.Write(tmate_cmd)
+	log_action("after tmate_cmd")
+	//os.Stdout.Write(tmate_cmd)
 	f, err := pty.Start(tmate_cmd)
 
 	if err != nil {
