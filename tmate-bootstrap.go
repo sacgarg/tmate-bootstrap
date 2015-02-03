@@ -35,9 +35,10 @@ func main() {
 
 	home := os.Getenv("HOME")
 	
-	cp_cmd := exec.Command("cp", "payload/.tmate.conf", home)
+	cp_cmd := exec.Command("cp", "payload/tmate.conf", home + "/.tmate.conf")
 	out, _ := cp_cmd.CombinedOutput()
 	os.Stdout.Write(out)
+	log_action("tmate.conf copied")
 	
 	payload_target := fmt.Sprint(home, "/", "payload.tgz")
 
