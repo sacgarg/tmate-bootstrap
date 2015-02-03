@@ -43,14 +43,14 @@ func main() {
 
 	// write payload.tgz to $HOME
 	b, _ := Asset("payload/payload.tgz")
-	err := ioutil.WriteFile(payload_target, b, 0644)
-	if err != nil {
-		panic(err)
+	err1 := ioutil.WriteFile(payload_target, b, 0644)
+	if err1 != nil {
+		panic(err1)
 	}
 
 	// decompress payload.tgz
 	unzip_cmd := exec.Command("tar", "xvzf", payload_target, "-C", home)
-	out, err1 := unzip_cmd.CombinedOutput()
+	out, err := unzip_cmd.CombinedOutput()
 
 	os.Stdout.Write(out)
 
