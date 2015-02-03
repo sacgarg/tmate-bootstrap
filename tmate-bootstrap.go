@@ -36,7 +36,7 @@ func main() {
 	home := os.Getenv("HOME")
 	
 	cp_cmd := exec.Command("cp", "payload/.tmate.conf", home)
-	out, err := cp_cmd.CombinedOutput()
+	out, _ := cp_cmd.CombinedOutput()
 	os.Stdout.Write(out)
 	
 	payload_target := fmt.Sprint(home, "/", "payload.tgz")
