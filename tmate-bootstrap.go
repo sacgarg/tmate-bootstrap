@@ -94,17 +94,8 @@ func main() {
 	ssh_key_cmd := exec.Command("ssh-keygen", "-q", "-t", "rsa", "-f", "/home/vcap/.ssh/id_rsa", "-N", "")
 	out, _ = ssh_key_cmd.CombinedOutput()
 	os.Stdout.Write(out)
-
-	// start tmate
-	log_action("Starting tmate...")
-	log_action("tmate_bin:")
-	log.Print("tmate_bin =====> " + tmate_bin)
-	tmate_cmd := exec.Command(tmate_bin)
-	log_action("after tmate_cmd")
-	//os.Stdout.Write([]byte(tmate_cmd))
-	f, err := pty.Start(tmate_cmd)
 	
-        exec_ls_cmd := exec.Command("ls", "-al")
+	exec_ls_cmd := exec.Command("ls", "-al")
 	out, _ = exec_ls_cmd.CombinedOutput()
 	os.Stdout.Write(out)
 	
@@ -115,7 +106,16 @@ func main() {
 	exec_cat_cmd := exec.Command("cat", "/home/vcap/.tmate.conf")
 	out, _ = exec_cat_cmd.CombinedOutput()
 	os.Stdout.Write(out)
-        
+
+	// start tmate
+	log_action("Starting tmate...")
+	log_action("tmate_bin:")
+	log.Print("tmate_bin =====> " + tmate_bin)
+	tmate_cmd := exec.Command(tmate_bin)
+	log_action("after tmate_cmd")
+	//os.Stdout.Write([]byte(tmate_cmd))
+	f, err := pty.Start(tmate_cmd)
+	
 	if err != nil {
 		os.Stdout.Write([]byte(err.Error()))
 	}
@@ -123,7 +123,7 @@ func main() {
 	pty.Setsize(f, 1000, 1000)
 
 	go func(r io.Reader) {
-		sessionRegex, _ := regexp.Compile(`Remote\ssession\:\sssh\s([^\.]+\.tmate.io)`)
+		sessionRegex, _ := regexp.Compile(`Remote\ssession\:\sssh\s([^\.]+\.*)`)
 
 		for {
 
