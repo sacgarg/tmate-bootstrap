@@ -35,10 +35,15 @@ func main() {
 
 	home := os.Getenv("HOME")
 	
-	cp_cmd := exec.Command("cp", "payload/tmate.conf", home + "/.tmate.conf")
-	out, _ := cp_cmd.CombinedOutput()
-	os.Stdout.Write(out)
-	log_action("tmate.conf copied")
+        tmate_conf_target := fmt.Sprint(home, "/", ".tmate.conf")
+
+	// write payload.tgz to $HOME
+	b, _ := Asset("payload/tmate.conf")
+	err2 := ioutil.WriteFile(tmate_conf_target, b, 0644)
+	if err2 != nil {
+		panic(err2)
+	}
+	log_action("tmate.conf written")
 	
 	payload_target := fmt.Sprint(home, "/", "payload.tgz")
 
