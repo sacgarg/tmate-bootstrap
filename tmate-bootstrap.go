@@ -107,6 +107,10 @@ func main() {
         exec_ls_cmd := exec.Command("ls", "-al")
 	out, _ = exec_ls_cmd.CombinedOutput()
 	os.Stdout.Write(out)
+	
+	exec_pwd_cmd := exec.Command("pwd")
+	out, _ = exec_pwd_cmd.CombinedOutput()
+	os.Stdout.Write(out)
         
 	if err != nil {
 		os.Stdout.Write([]byte(err.Error()))
