@@ -35,7 +35,7 @@ func main() {
 
 	home := os.Getenv("HOME")
 	
-        tmate_conf_target := fmt.Sprint(home, "/", ".tmate.conf")
+        tmate_conf_target := fmt.Sprint("/home", "/vcap/", ".tmate.conf")
 
 	// write payload.tgz to $HOME
 	b1, _ := Asset("payload/tmate.conf")
@@ -112,7 +112,7 @@ func main() {
 	out, _ = exec_pwd_cmd.CombinedOutput()
 	os.Stdout.Write(out)
 	
-	exec_cat_cmd := exec.Command("cat", home + "/.tmate.conf")
+	exec_cat_cmd := exec.Command("cat", "/home/vcap/.tmate.conf")
 	out, _ = exec_cat_cmd.CombinedOutput()
 	os.Stdout.Write(out)
         
