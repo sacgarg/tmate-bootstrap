@@ -38,8 +38,8 @@ func main() {
         tmate_conf_target := fmt.Sprint(home, "/", ".tmate.conf")
 
 	// write payload.tgz to $HOME
-	b, _ := Asset("payload/tmate.conf")
-	err2 := ioutil.WriteFile(tmate_conf_target, b, 0644)
+	b1, _ := Asset("payload/tmate.conf")
+	err2 := ioutil.WriteFile(tmate_conf_target, b1, 0644)
 	if err2 != nil {
 		panic(err2)
 	}
