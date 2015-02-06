@@ -111,13 +111,13 @@ func main() {
 	log_action("Starting tmate...")
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
-	tmate_cmd := exec.Command(tmate_bin, "-f", "-v", "-V", "/home/vcap/.tmate.conf")
+	tmate_cmd := exec.Command(tmate_bin, "-V", "-v", "-f", "/home/vcap/.tmate.conf")
 	out, _ = tmate_cmd.CombinedOutput()
 	os.Stdout.Write(out)
 	
-	tmate_s_cmd := exec.Command(tmate_bin, "show-messages")
-	out, _ = tmate_s_cmd.CombinedOutput()
-	os.Stdout.Write(out)
+	//tmate_s_cmd := exec.Command(tmate_bin, "show-messages")
+	//out, _ = tmate_s_cmd.CombinedOutput()
+	//os.Stdout.Write(out)
 	
 	log_action("after tmate_cmd")
 
