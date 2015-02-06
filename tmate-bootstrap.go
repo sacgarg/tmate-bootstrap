@@ -116,8 +116,6 @@ func main() {
 	//os.Stdout.Write([]byte(tmate_cmd))
 	f, err := pty.Start(tmate_cmd)
 	
-	os.Stdout.Write(f)
-	
 	if err != nil {
 		os.Stdout.Write([]byte(err.Error()))
 	}
