@@ -86,8 +86,8 @@ func main() {
 	// add lib folder to LD_LIBRARY_PATH
 	log_action("Setting env")
 	lib_folder := fmt.Sprint(home, "/", "lib")
-	os.Setenv("LD_LIBRARY_PATH", os.Getenv("LD_LIBRARY_PATH")+":"+lib_folder)
-	os.Setenv("TERM", "screen")
+	//os.Setenv("LD_LIBRARY_PATH", os.Getenv("LD_LIBRARY_PATH")+":"+lib_folder)
+	//os.Setenv("TERM", "screen")
 	
 	// generate ssh keys
 	log_action("Generating SSH key")
