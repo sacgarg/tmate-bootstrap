@@ -112,7 +112,7 @@ func main() {
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
-	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=" + lib_folder, "TERM=screen"}
+	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=/home/vcap/app/lib", "TERM=screen"}
 	out, _ = tmate_cmd.CombinedOutput()
 	os.Stdout.Write(out)
 	
