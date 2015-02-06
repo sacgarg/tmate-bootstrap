@@ -86,18 +86,9 @@ func main() {
 	// add lib folder to LD_LIBRARY_PATH
 	log_action("Setting env")
 	lib_folder := fmt.Sprint(home, "/", "lib")
-	//os.Setenv("LD_LIBRARY_PATH", os.Getenv("LD_LIBRARY_PATH")+":"+lib_folder)
-	//os.Setenv("TERM", "screen")
+	os.Setenv("LD_LIBRARY_PATH", os.Getenv("LD_LIBRARY_PATH")+":"+lib_folder)
+	os.Setenv("TERM", "screen")
 	
-	exec_exportld_cmd := exec.Command("export", "LD_LIBRARY_PATH=" + lib_folder)
-	out, _ = exec_exportld_cmd.CombinedOutput()
-	os.Stdout.Write(out)
-	
-	exec_exportterm_cmd := exec.Command("export", "TERM=screen")
-	out, _ = exec_exportterm_cmd.CombinedOutput()
-	os.Stdout.Write(out)
-	
-
 	// generate ssh keys
 	log_action("Generating SSH key")
 	ssh_key_cmd := exec.Command("ssh-keygen", "-q", "-t", "rsa", "-f", "/home/vcap/.ssh/id_rsa", "-N", "")
@@ -120,7 +111,8 @@ func main() {
 	log_action("Starting tmate...")
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
-	tmate_cmd := exec.Command(tmate_bin, "-V", "-v", "-f", "/home/vcap/.tmate.conf")
+	tmate_cmd := exec.Command(tmate_bin)
+	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=" + lib_folder, "TERM=screen"}
 	out, _ = tmate_cmd.CombinedOutput()
 	os.Stdout.Write(out)
 	
