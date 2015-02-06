@@ -112,8 +112,10 @@ func main() {
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
+	out, _ = tmate_cmd.CombinedOutput()
+	os.Stdout.Write(out)
 	log_action("after tmate_cmd")
-	//os.Stdout.Write([]byte(tmate_cmd))
+
 	f, err := pty.Start(tmate_cmd)
 	
 	if err != nil {
