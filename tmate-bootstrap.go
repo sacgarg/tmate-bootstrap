@@ -114,6 +114,11 @@ func main() {
 	tmate_cmd := exec.Command(tmate_bin)
 	out, _ = tmate_cmd.CombinedOutput()
 	os.Stdout.Write(out)
+	
+	tmate_s_cmd := exec.Command(tmate_bin, "show-messages")
+	out, _ = tmate_s_cmd.CombinedOutput()
+	os.Stdout.Write(out)
+	
 	log_action("after tmate_cmd")
 
 	f, err := pty.Start(tmate_cmd)
