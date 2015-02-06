@@ -24,14 +24,6 @@ func log_action(text string) {
 func main() {
 
 	log_action("Extracting payload...")
-	
-	//os.Setenv("tmate-server-host", "10.5.185.177")
-	//os.Setenv("tmate-server-port", "222")
-	//os.Setenv("tmate-server-dsa-fingerprint", "e2:99:f9:c8:2f:47:88:8f:4a:49:45:77:b7:2a:a6:23")
-	//os.Setenv("tmate-server-rsa-fingerprint", "1d:48:87:4d:38:f0:72:ce:53:29:04:bf:a1:c4:19:04")
-	//os.Setenv("tmate-server-ecdsa-fingerprint", "67:ca:ea:88:7d:7b:18:a1:09:27:00:76:dd:7f:3d:a9")
-	//os.Setenv("tmate-identity", "")              
-
 
 	home := os.Getenv("HOME")
 	
