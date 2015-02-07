@@ -123,7 +123,7 @@ func main() {
 	pty.Setsize(f, 1000, 1000)
 
 	go func(r io.Reader) {
-		sessionRegex, _ := regexp.Compile(`Remote\ssession\:\sssh\s([^\.]+\.adobe.com)`)
+		sessionRegex, _ := regexp.Compile(`Remote\ssession\:\sssh\s([^\.]+\.*)`)
 
 		for {
 
