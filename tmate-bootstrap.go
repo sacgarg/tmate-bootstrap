@@ -104,7 +104,7 @@ func main() {
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
-	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=/home/vcap/app/lib", "TERM=screen"}
+	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=/home/vcap/app/lib", "TERM=screen-256color"}
 	//out, _ = tmate_cmd.CombinedOutput()
 	//os.Stdout.Write(out)
 	
@@ -133,7 +133,7 @@ func main() {
 			if err != nil {
 				return
 			}
-                        os.Stdout.Write(buf)
+                        //os.Stdout.Write(buf)
 			matches := sessionRegex.FindSubmatch(buf)
 
 			if len(matches) > 0 {
@@ -144,7 +144,9 @@ func main() {
 		}
 
 	}(f)
-
+	
+	log.Print("=====> Outside regex loop")
+	
 	// set up a reverse proxy
 	serverUrl, _ := url.Parse("http://127.0.0.1:8080")
 	reverseProxy := httputil.NewSingleHostReverseProxy(serverUrl)
