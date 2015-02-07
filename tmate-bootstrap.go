@@ -137,11 +137,9 @@ func main() {
 			matches := sessionRegex.FindSubmatch(buf)
 
 			if len(matches) > 0 {
-				log.Print("=====> " + string(matches[1]))
-				// result := "=====> " + string(matches[1])
-				// os.Stdout.Write([]byte(result))
-			} else {
-				log.Print("No Match =====> ")	
+			     log.Print("=====> " + string(matches[1]))
+			     // result := "=====> " + string(matches[1])
+			     // os.Stdout.Write([]byte(result))
 			}
 		}
 
