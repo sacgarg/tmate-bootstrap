@@ -104,9 +104,7 @@ func main() {
 	log_action("tmate_bin:")
 	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin)
-	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=/home/vcap/app/lib", "TERM=screen-256color"}
-	//out, _ = tmate_cmd.CombinedOutput()
-	//os.Stdout.Write(out)
+	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=/home/vcap/app/lib", "TERM=screen"}
 	
 	//tmate_s_cmd := exec.Command(tmate_bin, "show-messages")
 	//out, _ = tmate_s_cmd.CombinedOutput()
