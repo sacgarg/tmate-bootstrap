@@ -124,7 +124,7 @@ func main() {
 
 		for {
 
-			buf := make([]byte, 1024)
+			buf := make([]byte, 2048)
 			_, err := r.Read(buf[:])
 
 			if err != nil {
