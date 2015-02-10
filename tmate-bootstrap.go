@@ -101,7 +101,7 @@ func main() {
 
 	// start tmate
 	log_action("Starting tmate...")
-	//log.Print("tmate_bin =====> " + tmate_bin)
+	log.Print("tmate_bin =====> " + tmate_bin)
 	tmate_cmd := exec.Command(tmate_bin, "-f", "/home/vcap/.tmate.conf", "-v")
 	tmate_cmd.Env = []string{"LD_LIBRARY_PATH=/home/vcap/app/lib", "TERM=screen"}
 	
