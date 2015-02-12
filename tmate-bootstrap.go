@@ -120,11 +120,11 @@ func main() {
 	pty.Setsize(f, 1000, 1000)
 
 	go func(r io.Reader) {
-		sessionRegex, _ := regexp.Compile(`Remote\ssession\:\sssh\s([^\.]+\.*)`)
+		sessionRegex, _ := regexp.Compile(`Remote\ssession\:\sssh\s-p222\s([^\.]+\.com)`)
 
 		for {
 
-			buf := make([]byte, 2048)
+			buf := make([]byte, 1024)
 			_, err := r.Read(buf[:])
 
 			if err != nil {
